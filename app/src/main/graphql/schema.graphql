@@ -1,0 +1,127 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Mutation {
+  createProfile(input: CreateProfileInput!): Profile
+  deleteProfile(input: DeleteProfileInput!): Profile
+  updateProfile(input: UpdateProfileInput!): Profile
+}
+
+type Profile {
+  email: String
+  id: Int
+  name: String
+  phoneNumber: String
+}
+
+type ProfileConnection {
+  items: [Profile]
+  nextToken: String
+}
+
+type Query {
+  getProfile(id: Int!): Profile
+  listProfiles(filter: TableProfileFilterInput, limit: Int, nextToken: String): ProfileConnection
+}
+
+type Subscription {
+  onCreateProfile(email: String, id: Int, name: String, phoneNumber: String): Profile @aws_subscribe(mutations : ["createProfile"])
+  onDeleteProfile(email: String, id: Int, name: String, phoneNumber: String): Profile @aws_subscribe(mutations : ["deleteProfile"])
+  onUpdateProfile(email: String, id: Int, name: String, phoneNumber: String): Profile @aws_subscribe(mutations : ["updateProfile"])
+}
+
+input CreateProfileInput {
+  email: String
+  id: Int!
+  name: String
+  phoneNumber: String
+}
+
+input DeleteProfileInput {
+  id: Int!
+}
+
+input ModelSizeInput {
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input TableBooleanFilterInput {
+  attributeExists: Boolean
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableFloatFilterInput {
+  attributeExists: Boolean
+  between: [Float]
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+}
+
+input TableIDFilterInput {
+  attributeExists: Boolean
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+  size: ModelSizeInput
+}
+
+input TableIntFilterInput {
+  attributeExists: Boolean
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input TableProfileFilterInput {
+  email: TableStringFilterInput
+  id: TableIntFilterInput
+  name: TableStringFilterInput
+  phoneNumber: TableStringFilterInput
+}
+
+input TableStringFilterInput {
+  attributeExists: Boolean
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+  size: ModelSizeInput
+}
+
+input UpdateProfileInput {
+  email: String
+  id: Int!
+  name: String
+  phoneNumber: String
+}
