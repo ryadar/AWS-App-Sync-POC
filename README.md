@@ -1,6 +1,10 @@
 # AWS-App-Sync-POC
 Android POC App for AWS App Sync
 
+
+amplify codegen models --target android --model-schema schema.json --output-dir ./
+
+
 <img width="828" alt="Screenshot 2024-01-29 at 11 54 05 PM" src="https://github.com/ryadar/AWS-App-Sync-POC/assets/29007468/6580eda1-8d7a-407c-ba43-72ce3d659f3a">
 
 
